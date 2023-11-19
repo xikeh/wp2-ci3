@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2023 at 12:34 AM
+-- Generation Time: Nov 19, 2023 at 07:47 AM
 -- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- PHP Version: 8.0.28
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -44,7 +44,7 @@ CREATE TABLE `bis` (
 --
 
 INSERT INTO `bis` (`kode_bis`, `nama_bis`, `kursi`, `jam_berangkat`, `kelas`, `harga`, `keterangan`, `rute`, `image`) VALUES
-(10, 'TransJabodetabek Jakarta', '20', '09:00:00', 'Premium', 30000, 'Ac, Hiburan, Kursi Recliner, Hotspot\r\n\r\nRute\r\n\r\nBundaran HI - Summarecon Mall Bekasi \r\n', 'Jakarta - Bekasi', 'TJimage.jpg'),
+(10, 'TransJabodetabek Jakarta', '20', '10:30:00', 'Premium', 30000, 'Ac, Hiburan, Kursi Recliner, Hotspot\r\n\r\nRute\r\n\r\nBundaran HI - Summarecon Mall Bekasi \r\n', 'Jakarta - Bekasi', 'TJimage.jpg'),
 (11, 'TransJabodetabek Jakarta', '20', '15:00:00', 'Reguler', 15000, 'Ac, Kursi Recliner\r\n\r\nRute\r\n\r\nBundaran HI - Summarecon Mall Bekasi', 'Jakarta - Bekasi', 'TJimage.jpg'),
 (12, 'TransJabodetabek Jakarta', '20', '08:00:00', 'Premium', 30000, 'Ac, Hiburan, Kursi Recliner, Hotspot', 'Jakarta - Tangerang', 'TJimage.jpg'),
 (13, 'TransJabodetabek Jakarta', '20', '15:00:00', 'Reguler', 15000, 'Ac, Kursi Recliner', 'Jakarta - Tangerang', 'TJimage.jpg'),
@@ -55,7 +55,7 @@ INSERT INTO `bis` (`kode_bis`, `nama_bis`, `kursi`, `jam_berangkat`, `kelas`, `h
 (18, 'TransJabodetabek Bekasi', '20', '06:40:00', 'Premium', 30000, 'Ac, Hiburan, Kursi Recliner, Hotspot\r\nRute\r\nSummarecon Mall Bekasi - Bundaran HI', 'Bekasi - Jakarta', 'TJimageBksi.jpg'),
 (19, 'TransJabodetabek Bekasi', '20', '05:00:00', 'Reguler', 15000, 'Ac, Kursi Recliner\r\nRute\r\nSummarecon Mall Bekasi - Bundaran HI', 'Bekasi - Jakarta', 'TJimageBksi.jpg'),
 (20, 'TransJabodetabek Bekasi', '20', '07:30:00', 'Premium', 30000, 'Ac, Hiburan, Kursi Recliner, Hotspot', 'Bekasi - Tangerang', 'TJimageBksi.jpg'),
-(21, 'TransJabodetabek Bekasi', '20', '09:00:00', 'Reguler', 15000, 'Ac, Kursi Recliner', 'Bekasi - Tangerang', 'TJimageBksi.jpg');
+(21, 'TransJabodetabek Bekasi', '21', '09:00:00', 'Premium', 15000, 'Ac, Kursi Recliner', 'Bekasi - Tangerang', 'TJimageBksi.jpg');
 
 -- --------------------------------------------------------
 
@@ -84,7 +84,7 @@ INSERT INTO `detail_pesan` (`id_pesan`, `kode_bis`, `harga`) VALUES
 --
 
 CREATE TABLE `pemesanan` (
-  `id_pesan` varchar(11) NOT NULL,
+  `id_pesan` varchar(255) NOT NULL,
   `email` varchar(35) NOT NULL,
   `kode_bis` int(11) NOT NULL,
   `rute` text NOT NULL,
@@ -100,13 +100,7 @@ CREATE TABLE `pemesanan` (
 --
 
 INSERT INTO `pemesanan` (`id_pesan`, `email`, `kode_bis`, `rute`, `harga`, `tgl_berangkat`, `jam_berangkat`, `kursi`, `status`) VALUES
-('ABTB008', 'muhammadbiben@gmail.com', 19, 'Bekasi - Jakarta', 15000, '2019-06-30', '05:00:00', '4', 'menunggu pembayaran'),
-('ABTB009', 'sofyanarifin@gmail.com', 20, 'Bekasi - Tangerang', 30000, '2019-06-24', '07:30:00', '4', 'menunggu pembayaran'),
-('ABTB011', 'awalnp@gmail.com', 16, 'Jakarta - Bogor', 30000, '2019-06-24', '07:00:00', '2', 'menunggu pembayaran'),
-('ABTB012', 'awalnp@gmail.com', 17, 'Jakarta - Bogor', 15000, '2019-06-30', '12:30:00', '2', 'menunggu pembayaran'),
-('ABTB013', 'muhammadilyas@gmail.com', 11, 'Jakarta - Bekasi', 15000, '2019-06-17', '15:00:00', '2', 'menunggu pembayaran'),
-('ABTB015', 'muhammadilyas@gmail.com', 10, 'Jakarta - Bekasi', 30000, '2019-06-20', '09:00:00', '3', 'menunggu pembayaran'),
-('ABTB018', 'miko@gmail.com', 10, 'Jakarta - Bekasi', 30000, '2023-11-17', '09:00:00', '3', 'menunggu pembayaran');
+('ABTB017', 'dimas@gmail.com', 10, 'Jakarta - Bekasi', 30000, '2023-11-25', '09:00:00', '1', 'menunggu pembayaran');
 
 -- --------------------------------------------------------
 
@@ -134,10 +128,13 @@ INSERT INTO `role` (`id_role`, `nama_role`) VALUES
 --
 
 CREATE TABLE `transaksi` (
-  `id_pesan` varchar(11) NOT NULL,
+  `id_pesan` varchar(255) NOT NULL,
   `email` varchar(35) NOT NULL,
   `kode_bis` int(11) NOT NULL,
+  `rute` text NOT NULL,
+  `harga` int(255) NOT NULL,
   `tgl_berangkat` date NOT NULL,
+  `jam_berangkat` time NOT NULL,
   `kursi` enum('1','2','3','4') NOT NULL,
   `status` enum('belum terbayar','sudah terbayar') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
@@ -146,12 +143,12 @@ CREATE TABLE `transaksi` (
 -- Dumping data for table `transaksi`
 --
 
-INSERT INTO `transaksi` (`id_pesan`, `email`, `kode_bis`, `tgl_berangkat`, `kursi`, `status`) VALUES
-('ABTB000', 'sofyanarifin@gmail.com', 20, '2019-05-01', '2', 'sudah terbayar'),
-('ABTB001', 'muhammadilyas@gmail.com', 12, '2019-06-23', '2', 'sudah terbayar'),
-('ABTB002', 'awal.np@gmail.com', 16, '2019-06-01', '3', 'sudah terbayar'),
-('ABTB003', 'muhammadbiben@gmail.com', 10, '2019-06-05', '2', 'sudah terbayar'),
-('ABTB004', 'muhammadilyas@gmail.com', 17, '2019-06-01', '2', 'sudah terbayar');
+INSERT INTO `transaksi` (`id_pesan`, `email`, `kode_bis`, `rute`, `harga`, `tgl_berangkat`, `jam_berangkat`, `kursi`, `status`) VALUES
+('bus-07216c228028fc838a1411', 'miko@gmail.com', 11, 'Jakarta - Bekasi', 15000, '2023-11-16', '15:00:00', '1', 'sudah terbayar'),
+('bus-62a4d33111', 'miko@gmail.com', 11, 'Jakarta - Bekasi', 15000, '2023-11-21', '15:00:00', '1', 'sudah terbayar'),
+('bus-b7bd138710', 'miko@gmail.com', 10, 'Jakarta - Bekasi', 30000, '2023-11-17', '10:30:00', '1', 'sudah terbayar'),
+('bus-1b9e9e6810', 'miko@gmail.com', 10, 'Jakarta - Bekasi', 30000, '2023-11-16', '10:30:00', '1', 'sudah terbayar'),
+('bus-6a83f12a10', 'miko@gmail.com', 10, 'Jakarta - Bekasi', 30000, '2023-11-10', '10:30:00', '1', 'sudah terbayar');
 
 -- --------------------------------------------------------
 
@@ -174,8 +171,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `nama`, `no_telp`, `email`, `password`, `id_role`, `image`) VALUES
-(10, 'Yaya Arif Mustofa', '087888213', 'yaya@gmail.com', '25d55ad283aa400af464c76d713c07ad', 1, 'default.jpg'),
-(11, 'Miko Alfian', '0892331312', 'miko@gmail.com', '25d55ad283aa400af464c76d713c07ad', 2, 'default.jpg');
+(10, 'YAYA ARIF MUSTOFA', '0878882132', 'yaya@gmail.com', '202cb962ac59075b964b07152d234b70', 1, 'default.jpg'),
+(11, 'Miko Alfian', '0892331312', 'miko@gmail.com', '202cb962ac59075b964b07152d234b70', 2, 'default.jpg'),
+(12, 'Dodi Alfayet', '123124', 'yayaarif4@gmail.com', '202cb962ac59075b964b07152d234b70', 2, 'default.jpg'),
+(14, 'Fajar Rizki', '081230721', 'fajar@gmail.com', '202cb962ac59075b964b07152d234b70', 2, 'default.jpg');
 
 -- --------------------------------------------------------
 
@@ -233,7 +232,7 @@ ALTER TABLE `user_token`
 -- AUTO_INCREMENT for table `bis`
 --
 ALTER TABLE `bis`
-  MODIFY `kode_bis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `kode_bis` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT for table `role`
@@ -245,7 +244,7 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_user` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `user_token`
