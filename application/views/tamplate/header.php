@@ -20,7 +20,7 @@
       rel="icon"
       type="image/png"
       sizes="16x16"
-      href="<?=base_url('assets/')?>assets/images/favicon.png"
+      href="assets/image/favicon.png"
     />
     <!-- Custom CSS -->
     <link href="<?=base_url('assets/')?>assets/libs/flot/css/float-chart.css" rel="stylesheet" />

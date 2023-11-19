@@ -2,7 +2,7 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 class Admin extends CI_Controller{
-  // Function 
+  // Function untuk men
   public function __construct(){
     parent::__construct();
     $this->load->library('form_validation');
@@ -26,7 +26,7 @@ class Admin extends CI_Controller{
   public function daftarbus(){
     $data['judul'] = 'Daftar Bus';
     $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-    $data['bus'] = $this->M_abtb->get_data('bis')->result();
+    $data['bus'] = $this->M_bus->get_data('bis')->result();
 
     $this->load->view('tamplate/header' , $data);
     $this->load->view('admin/daftarbus',$data);
@@ -65,12 +65,12 @@ class Admin extends CI_Controller{
       if($this->upload->do_upload('image')){
         $image = $this->upload->data();
         $data = array(
-            'nama_bis' => $nama,
-            'kursi' => $kursi,
-            'kelas' => $kelas,
-            'keterangan' => $keterangan,
-            'rute' => $rute,
-            'image' => $image['file_name']
+          'nama_bis' => $nama,
+          'kursi' => $kursi,
+          'kelas' => $kelas,
+          'keterangan' => $keterangan,
+          'rute' => $rute,
+          'image' => $image['file_name']
         );
         $this->db->insert('bis', $data);
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Selamat Data Telah Ditambahkan</div>');
@@ -83,23 +83,25 @@ class Admin extends CI_Controller{
         $this->load->view('tamplate/header', $data);
         $this->load->view('admin/tambah',$data);
         $this->load->view('tamplate/footer');
+      }
     }
-  }
 }
 
+// Funciton untuk menampilkan detail bus
   public function detailBus($id){
     $data['judul'] = 'Detail';
     $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-    $data['detail'] = $this->M_abtb->bus($id);
+    $data['detail'] = $this->M_bus->bus($id);
     $this->load->view('tamplate/header', $data);
     $this->load->view('admin/detailbus',$data);
     $this->load->view('tamplate/footer');
   }
 
+//Function untuk edit bus 
   public function editBus($id){
     $data['judul'] = 'Edit Data';
     $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-    $data['detail'] = $this->M_abtb->bus($id);
+    $data['detail'] = $this->M_bus->bus($id);
     $this->form_validation->set_rules('nama_bis', 'Nama Bis', 'required|trim');
     $this->form_validation->set_rules('kursi', 'Jumlah Kursi', 'required|trim');
     $this->form_validation->set_rules('harga', 'Harga', 'required|trim|numeric');
@@ -155,7 +157,7 @@ class Admin extends CI_Controller{
 
   // function untuk hapus data bus
   public function hapusBus($id){
-    $this->M_abtb->hapusbus($id);
+    $this->M_bus->hapusbus($id);
     $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Terhapus</div>');
     redirect('admin/daftarbus');
   }
@@ -163,7 +165,7 @@ class Admin extends CI_Controller{
   // function untuk hapus data user
   public function hapususer($id){
     $where = ['id_user' => $id];
-    $this->M_abtb->delete_data($where, 'user');
+    $this->M_bus->delete_data($where, 'user');
     $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Terhapus</div>');
     redirect('admin/datauser');
   }
@@ -172,7 +174,7 @@ class Admin extends CI_Controller{
   public function datauser(){
     $data['judul'] = 'Data Pengguna';
     $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-    $data['anggota'] = $this->M_abtb->get_data('user')->result();
+    $data['anggota'] = $this->M_bus->get_data('user')->result();
     
     $this->load->view('tamplate/header' ,$data);
     $this->load->view('admin/datauser',$data);
@@ -190,12 +192,11 @@ class Admin extends CI_Controller{
     $this->load->view('tamplate/footer');
   }
 
-  
   // funtion untuk menampilkan data transaksi
   public function datatransaksi(){
     $data['judul'] = 'Data Transaksi';
     $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
-    $data['transaksi'] = $this->M_abtb->get_data('transaksi')->result();
+    $data['transaksi'] = $this->M_bus->get_data('transaksi')->result();
     
     $this->load->view('tamplate/header', $data);
     $this->load->view('admin/datatransaksi',$data);
@@ -207,9 +208,9 @@ class Admin extends CI_Controller{
     $data['judul'] = 'Edit Profil';
     $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
   
-    $this->form_validation->set_rules('nama', 'Nama Lengkap', 'required|trim');
-    $this->form_validation->set_rules('password', 'Password Baru');
-    $this->form_validation->set_rules('notelp', 'Nomor Telepon', 'numeric');
+      $this->form_validation->set_rules('nama', 'Nama Lengkap', 'required|trim');
+      $this->form_validation->set_rules('password', 'Password Baru');
+      $this->form_validation->set_rules('notelp', 'Nomor Telepon', 'numeric');
   
     if ($this->form_validation->run() == false) {
       $this->load->view('tamplate/header', $data);

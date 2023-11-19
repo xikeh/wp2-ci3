@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct Script access allowed');
 
-class M_abtb extends CI_Model
+class M_bus extends CI_Model
 {
     public function edit_data($where,$table){
         return $this->db->get_where($table,$where);

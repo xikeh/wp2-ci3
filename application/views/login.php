@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row g-0">
-        <div class="col-6">
-            <div class="bg-image"></div>
+        <div class="col-5 offset-1 bg-white d-flex justify-content-center align-items-center" style="border-top-left-radius: 10px;border-bottom-left-radius: 10px;">
+            <img class="w-75" src="<?= base_url('assets/image/img_bg.jpg'); ?>" alt="">
         </div>
         <div class="col-6">
             <div class="card">

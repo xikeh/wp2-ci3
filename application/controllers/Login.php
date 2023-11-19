@@ -1,17 +1,15 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Login extends CI_Controller
-{
-	public function __construct()
-	{
+class Login extends CI_Controller{
+	public function __construct(){
 		parent::__construct();
 		$this->load->library('form_validation');
-		$this->load->model('M_abtb');
+		$this->load->model('M_bus');
 	}
 
-	public function index()
-	{
+	// Function untuk tampilan login
+	public function index(){
 		if ($this->session->userdata('email')) {
 			redirect('user');
 		}
@@ -19,18 +17,19 @@ class Login extends CI_Controller
 		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
 		$this->form_validation->set_rules('password', 'Password', 'trim|required');
 		if ($this->form_validation->run() == false) {
-			$data['judul'] = "Login";
+			$data['judul'] = "Login E-TIKBUS";
 			$this->load->view('tamplate/header_login', $data);
 			$this->load->view('login');
 			$this->load->view('tamplate/footer_login');
-		}else{
+		}
+		else{
 			// validasi sukses!
 			$this->_login();
 		}
 	}
 
-	private function _login()
-	{
+	// Funtion untuk form login
+	private function _login(){
 		$email = $this->input->post('email');
 		$password = $this->input->post('password');
 		$user = $this->db->get_where('user', ['email' => $email, 'password' => md5($password)])->row_array();
@@ -46,14 +45,15 @@ class Login extends CI_Controller
 				} else {
 					return redirect('user');
 				}
-		} else {
+		}
+		else {
 			$this->session->set_flashdata('message', 'Akun Tidak Ditemukan!');
 			redirect('login');
 		}
 	}
 
-	public function daftar()
-	{
+	// Function untuk daftar
+	public function daftar(){
 		if ($this->session->userdata('email')) {
 			redirect('user');
 		}
@@ -70,11 +70,12 @@ class Login extends CI_Controller
 		]);
 		
 		if ($this->form_validation->run() == false) {
-			$data ['judul'] = 'Daftar';
-			$this->load->view('tamplate/header', $data);
+			$data ['judul'] = 'Registrasi Pengguna Baru';
+			$this->load->view('tamplate/header_login', $data);
 			$this->load->view('daftar');
-			$this->load->view('tamplate/footer');
-		}else{
+			$this->load->view('tamplate/footer_login');
+		}
+		else{
 			$data = [
 				'nama' => htmlspecialchars($this->input->post('name', true)),
 				'no_telp' => htmlspecialchars($this->input->post('no_telp', true)),
@@ -90,9 +91,11 @@ class Login extends CI_Controller
 		}
 	}
 
-	public function logout()
-	{
-		$this->session->sess_destroy();
+	// Function untuk logout
+	public function logout(){
+		// $this->session->sess_destroy();
+		$this->session->unset_userdata('email');
+		$this->session->unset_userdata('role_id');
 		$this->session->set_flashdata('message-success', 'Anda Berhasil Logout!');
 		redirect('login');
 	}

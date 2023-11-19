@@ -13,7 +13,7 @@
     <link rel="shortcut icon" href="<?= base_url('assets/image/favicon.png'); ?>">
 
     <!-- style.css -->
-    <link rel="stylesheet" href="<?= base_url('assets/css/style.css'); ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/css/login.css'); ?>">
 
     <title><?= $judul; ?></title>
 </head>
