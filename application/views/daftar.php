@@ -36,20 +36,6 @@
                         </div>
                         <p class="text-center">Sudah punya akun ? <a href="<?= base_url('login'); ?>">Login</a></p>
                     </form>
-                    <!-- untuk OAuth Signup -->
-                    <!-- <span class="divider line one-line">Or</span>
-                    <div class="d-grid gap-2">
-                        <a href="" class="btn btn-outline-primary">
-                            <div class="row">
-                                <div class="col-2">
-                                    <img src="<?= base_url('assets/image/icon/google.png'); ?>" alt="Google" width="20">
-                                </div>
-                                <div class="col-10">
-                                    Login with Google
-                                </div>
-                            </div>
-                        </a>
-                    </div> -->
                 </div>
             </div>
         </div>
