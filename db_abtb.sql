@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 26, 2023 at 08:53 AM
+-- Generation Time: May 23, 2024 at 08:14 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -154,23 +154,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `nama`, `no_telp`, `email`, `password`, `id_role`, `image`) VALUES
-(10, 'Yaya Arif Mustofa', '01238071298', 'yaya@gmail.com', '202cb962ac59075b964b07152d234b70', 1, 'default.jpg'),
-(11, 'Miko Alfian', '0892331312', 'miko@gmail.com', '202cb962ac59075b964b07152d234b70', 2, 'default.jpg'),
-(12, 'Dodi Alfayet', '123124', 'yayaarif4@gmail.com', '202cb962ac59075b964b07152d234b70', 2, 'default.jpg'),
-(18, 'christoper', '0828916', 'toper@gmail.com', 'c4ca4238a0b923820dcc509a6f75849b', 2, 'default.jpg');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `user_token`
---
-
-CREATE TABLE `user_token` (
-  `id` int(11) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `token` varchar(255) NOT NULL,
-  `date_created` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+(23, 'admin', '0812312123', 'admin@gmail.com', 'd41d8cd98f00b204e9800998ecf8427e', 1, 'default.jpg'),
+(24, 'user', '08123712413', 'user@gmail.com', 'ee11cbb19052e40b07aac0ca060c23ee', 2, 'default.jpg');
 
 --
 -- Indexes for dumped tables
@@ -208,12 +193,6 @@ ALTER TABLE `user`
   ADD KEY `id_role` (`id_role`);
 
 --
--- Indexes for table `user_token`
---
-ALTER TABLE `user_token`
-  ADD PRIMARY KEY (`id`);
-
---
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -233,13 +212,7 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
-
---
--- AUTO_INCREMENT for table `user_token`
---
-ALTER TABLE `user_token`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_user` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
